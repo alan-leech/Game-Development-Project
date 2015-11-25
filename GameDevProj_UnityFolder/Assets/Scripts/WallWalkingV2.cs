@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 
-
 public class WallWalkingV2 : MonoBehaviour {
 	
 	public float moveSpeed = 6; // move speed
