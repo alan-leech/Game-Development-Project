@@ -30,6 +30,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		bool m_Crouching;
 
 
+		public void setSpeed(float x, float y){
+			m_MoveSpeedMultiplier = x;
+			m_AnimSpeedMultiplier = y;
+		}//end of setSpeed
+
+
 		void Start()
 		{
 			m_Animator = GetComponent<Animator>();
