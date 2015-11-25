@@ -21,3 +21,9 @@
  *.unityproj
  *.sln
  *.userprefs
+ *.suo
+ *.tmp
+ *.user
+ *.booproj
+ *.pidb.meta
+ sysinfo.txt
