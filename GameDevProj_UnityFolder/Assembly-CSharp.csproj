@@ -58,6 +58,7 @@
      <Compile Include="Assets\Scripts\PlayerBehaviour.cs" />
      <Compile Include="Assets\Scripts\RolloverButton.cs" />
      <Compile Include="Assets\Scripts\Rotater.cs" />
+     <Compile Include="Assets\Scripts\Shoot.cs" />
      <Compile Include="Assets\Scripts\ThirdPersonCharacter.cs" />
      <Compile Include="Assets\Scripts\ThirdPersonUserControl.cs" />
      <Compile Include="Assets\Scripts\WallWalking.cs" />
