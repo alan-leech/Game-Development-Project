@@ -21,6 +21,8 @@ public class PlayerBehaviour : MonoBehaviour {
 	private bool torchUpgrade = false;
 
 	public int coins = 0;
+	public int health = 5;
+	public int livesLeft = 3;
 	public int keyPieces = 0;
 
 	/** Reference to audio Clips */
@@ -42,6 +44,9 @@ public class PlayerBehaviour : MonoBehaviour {
 	public void setCoins(int x){
 		coins = x;
 	}
+	public void setHealth(int x){
+		health = x;
+	}
 
 	// GET ************************************************
 	public bool GetGunUpgrade(){
@@ -57,7 +62,15 @@ public class PlayerBehaviour : MonoBehaviour {
 	public int GetCoins(){
 		return coins;	
 	}
-
+	public int GetHealth(){
+		return health;	
+	}
+	public int GetLivesLeft(){
+		return livesLeft;	
+	}
+	public int GetKeyPieces(){
+		return keyPieces;	
+	}
 
 	// Start and Update Methods ************************************************************
 	public void Start(){

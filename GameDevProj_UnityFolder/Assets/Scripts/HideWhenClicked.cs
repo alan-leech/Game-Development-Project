@@ -11,7 +11,7 @@ public class HideWhenClicked : MonoBehaviour {
 	{
 		//Specify reference location, script is componnent of Object tagged "Player"
 		playerInfo = GameObject.FindWithTag("Player").GetComponent<PlayerBehaviour>();
-		gameObject.SetActive (true);
+		//gameObject.SetActive (true);
 	}
 
 
@@ -69,8 +69,9 @@ public class HideWhenClicked : MonoBehaviour {
 		}//end If "P" is pressed 
 		
 		//Deactivate popup menu when use presses enter
-		if(Input.GetKeyDown("return"))
-			gameObject.SetActive (false);
+		if (Input.GetKeyDown ("return"))
+			//gameObject.SetActive (false);
+			Destroy (gameObject);
 
 	}//end of UpgradePopUpManager...
 
