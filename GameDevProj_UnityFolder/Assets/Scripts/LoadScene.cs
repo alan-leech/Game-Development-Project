@@ -8,8 +8,8 @@ public class LoadScene : MonoBehaviour {
         Application.LoadLevel(index);
     }
 
-    public void NextLevelButton(string levelName)
+   /* public void NextLevelButton(string levelName)
     {
         Application.LoadLevel(levelName);
-    }
+    }*/
 }
