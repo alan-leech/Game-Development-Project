@@ -1,0 +1,18 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\Game-Development-Project\GameDevProj_UnityFolder\Assets\Scripts\GunScripts\DestroyEnemies.cs">
+    <Files>
+      <File FileName="..\..\..\Game-Development-Project\GameDevProj_UnityFolder\Assets\Scripts\PlayerBehaviour.cs" Line="97" Column="90" />
+      <File FileName="..\..\..\Game-Development-Project\GameDevProj_UnityFolder\Assets\Scripts\LoadSceneManager.cs" Line="1" Column="1" />
+      <File FileName="..\..\..\Game-Development-Project\GameDevProj_UnityFolder\Assets\Scripts\GuardCharacterController.cs" Line="59" Column="1" />
+      <File FileName="..\..\..\Game-Development-Project\GameDevProj_UnityFolder\Assets\Scripts\HideWhenClicked.cs" Line="15" Column="81" />
+      <File FileName="..\..\..\Game-Development-Project\GameDevProj_UnityFolder\Assets\Scripts\ExitSensorBehaviour.cs" Line="15" Column="3" />
+      <File FileName="..\..\..\Game-Development-Project\GameDevProj_UnityFolder\Assets\Scripts\Shootupgrade.cs" Line="64" Column="4" />
+      <File FileName="..\..\..\Game-Development-Project\GameDevProj_UnityFolder\Assets\Scripts\GunScripts\DestroyEnemies.cs" Line="10" Column="29" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
