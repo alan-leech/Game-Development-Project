@@ -2,9 +2,8 @@
 using System.Collections;
 
 public class PlayerBehaviour : MonoBehaviour {
-	
-	//public int livesLeft = 3;
-	//private bool carryingKey = false;
+
+	//Key booleans
 	private bool mainGatesKey = false;
 	private bool metalWallKey = false;
 
@@ -15,6 +14,7 @@ public class PlayerBehaviour : MonoBehaviour {
 	public GameObject speedUpgradeMenuPrefab;
 	public GameObject torchUpgradeMenuPrefab;
 	public GameObject gunUpgradeMenuPrefab;
+	public GameObject magnetCapsuleNotifyPrefab;
 
 	//Upgrade Managers
 	private bool gunUpgrade = false;
@@ -22,80 +22,36 @@ public class PlayerBehaviour : MonoBehaviour {
 	private bool torchUpgrade = false;
 	public bool magnetCapsule = false;
 
-	public int coins = 0;
-	public int health = 5;
-	public int livesLeft = 3;
-	public int keyPieces = 0;
+	//Interger Values
+	private int coins = 0;
+	private int health = 5;
+	private int livesLeft = 3;
+	private int keyPieces = 0;
+	public int levelToLoad;
 
 	/** Reference to audio Clips */
-	//public AudioClip deathSound;
+	public AudioClip dmgSound;
+	public AudioClip deathSound;
 	public AudioClip keyPickUpSound;
 	public AudioClip coinPickUpSound;
-	//public AudioClip civilianSavedSound;
-	//public int gameOverLoad;
+	public AudioClip healthPickUpSound;
 
 	private AudioSource source;
 
-	// SET ***********************************************
-	public void SetGunUpgrade(bool x){
-		gunUpgrade = x;	
-	}
-	public void SetSpeedUpgrade(bool x){
-		speedUpgrade = x;	
-	}
-	public void SetTorchUpgrade(bool x){
-		torchUpgrade = x;	
-	}
-	public void SetMetalWallKey(bool x){
-		metalWallKey = x;	
-	}
-	public void setCoins(int x){
-		coins = x;
-	}
-	public void setHealth(int x){
-		health = x;
-	}
+	//Death Managing Vals
+	private float delayBetweenDeaths = 0.5f; 
+	private float nextTimeAllowedToDie = 0; 
 
-	// GET ************************************************
-	public bool GetGunUpgrade(){
-		return gunUpgrade;	
-	}
-	public bool GetSpeedUpgrade(){
-		return speedUpgrade;	
-	}
-	public bool GetTorchUpgrade(){
-		return torchUpgrade;	
-	}
-	public bool HasMagnetCapsule(){
-		return magnetCapsule;	
-	}
-
-	public int GetCoins(){
-		return coins;	
-	}
-	public int GetHealth(){
-		return health;	
-	}
-	public int GetLivesLeft(){
-		return livesLeft;	
-	}
-	public int GetKeyPieces(){
-		return keyPieces;	
-	}
-	public bool GetMetalWallKey(){
-		return metalWallKey;	
-	}
 
 	// Start and Update Methods ************************************************************
 	public void Start(){
 		unityCharacter = GameObject.FindWithTag("Player").GetComponent<ThirdPersonCharacter>();
 		source = GetComponent<AudioSource>();
-
 	}
 
 	public void Update(){
 		checkUpgrades ();
-
+		checkHealth ();
 	}//end of Update ************************************************************************
 
 
@@ -130,12 +86,11 @@ public class PlayerBehaviour : MonoBehaviour {
 		if(c.CompareTag("Coin")){
 			coins = coins + 50;
 			source.PlayOneShot(coinPickUpSound);
-			//print(coins.ToString());
 			DestroyObject(c.gameObject);
 		}
 
 		if(c.CompareTag("KeyPiece")){
-			keyPieces = keyPieces + 1;
+			keyPieces++;
 			source.PlayOneShot(keyPickUpSound);
 			DestroyObject(c.gameObject);
 		}
@@ -143,20 +98,24 @@ public class PlayerBehaviour : MonoBehaviour {
 		if(c.CompareTag("MagnetCapsule")){
 			magnetCapsule = true;
 			source.PlayOneShot(keyPickUpSound);
+			Instantiate(magnetCapsuleNotifyPrefab);
 			DestroyObject(c.gameObject);
 		}
 
-		/*
-		if (c.CompareTag("Kill")) {
-			if(Time.time > nextTimeAllowedToDie) { 
-				LoseLife(); 
-				print("OWWW");
-			} 
-
+		if(c.CompareTag("damage")){
+			source.PlayOneShot(dmgSound);
+			health--;
 		}
-		*/
 
-	}
+		if(c.CompareTag("health")){
+			source.PlayOneShot(healthPickUpSound);
+			DestroyObject(c.gameObject);
+			if(health < 5){
+				health++;
+			}
+		}
+
+	}//end of OnTriggerEnter
 
 	private void onTriggerExit(Collider c){
 
@@ -171,17 +130,78 @@ public class PlayerBehaviour : MonoBehaviour {
 		
 	}
 
-	/**
-	 * Respawn in level at a 'respawn' position
-	 */
+	private void checkHealth(){
+		
+		if (health <= 0) {
+			if(Time.time > nextTimeAllowedToDie){
+				livesLeft--;
+				source.PlayOneShot(deathSound);
+				MoveToCheckpoint();
+				health = 5;
+				nextTimeAllowedToDie = Time.time + delayBetweenDeaths;
+				if (livesLeft == 0) 
+						Application.LoadLevel (levelToLoad);
+			}
+		}
+	}//end of CheckHealth
 
-	/*
 	private void MoveToCheckpoint(){ 
 
 		GameObject respawnGO = GameObject.FindWithTag("Respawn"); 
 			Vector3 checkPoint = respawnGO.transform.position; 
 			transform.position = checkPoint; 
 
+	}//end of MoveToCheckpoint
+
+	
+	// SET ***********************************************
+	public void SetGunUpgrade(bool x){
+		gunUpgrade = x;	
 	}
-	*/
-}
+	public void SetSpeedUpgrade(bool x){
+		speedUpgrade = x;	
+	}
+	public void SetTorchUpgrade(bool x){
+		torchUpgrade = x;	
+	}
+	public void SetMetalWallKey(bool x){
+		metalWallKey = x;	
+	}
+	public void setCoins(int x){
+		coins = x;
+	}
+	public void setHealth(int x){
+		health = x;
+	}
+	
+	// GET ************************************************
+	public bool GetGunUpgrade(){
+		return gunUpgrade;	
+	}
+	public bool GetSpeedUpgrade(){
+		return speedUpgrade;	
+	}
+	public bool GetTorchUpgrade(){
+		return torchUpgrade;	
+	}
+	public bool HasMagnetCapsule(){
+		return magnetCapsule;	
+	}
+	
+	public int GetCoins(){
+		return coins;	
+	}
+	public int GetHealth(){
+		return health;	
+	}
+	public int GetLivesLeft(){
+		return livesLeft;	
+	}
+	public int GetKeyPieces(){
+		return keyPieces;	
+	}
+	public bool GetMetalWallKey(){
+		return metalWallKey;	
+	}
+
+}//end of class

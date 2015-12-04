@@ -30,7 +30,7 @@ public class LoadSceneManager : MonoBehaviour {
 		
 	}
 	
-	void loadWin(){
+	public void loadWin(){
 		Application.LoadLevel(levelToLoad);
 	}
 

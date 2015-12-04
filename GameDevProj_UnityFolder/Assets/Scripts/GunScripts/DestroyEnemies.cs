@@ -7,7 +7,7 @@ public class DestroyEnemies : MonoBehaviour {
 
 	void OnCollisionEnter (Collision col)
 	{
-		if(col.gameObject.tag =="enemy")
+		if(col.gameObject.tag =="Guard")
 		{
 			Destroy(col.gameObject);
 		}

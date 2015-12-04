@@ -1,12 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\LoadSceneManager.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GuardCharacterController.cs">
     <Files>
-      <File FileName="Assets\Scripts\PlayerBehaviour.cs" Line="125" Column="4" />
-      <File FileName="Assets\Scripts\GameGUI.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\DestroyWhenHit.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\NonMetalWallManager.cs" Line="10" Column="2" />
-      <File FileName="Assets\Scripts\LoadSceneManager.cs" Line="26" Column="4" />
+      <File FileName="Assets\Scripts\LoadSceneManager.cs" Line="20" Column="1" />
+      <File FileName="Assets\Scripts\PlayerBehaviour.cs" Line="12" Column="2" />
+      <File FileName="Assets\Scripts\GuardCharacterController.cs" Line="75" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -7,11 +7,13 @@ public class HideWhenClicked : MonoBehaviour {
 	//Reference to PlayerBehaviour script
 	private PlayerBehaviour playerInfo;
 
+	public AudioClip purchaseUpgradeSound;
+	private AudioSource source;
+
 	void Start()
 	{
-		//Specify reference location, script is componnent of Object tagged "Player"
 		playerInfo = GameObject.FindWithTag("Player").GetComponent<PlayerBehaviour>();
-		//gameObject.SetActive (true);
+		source = GetComponent<AudioSource>();
 	}
 
 
@@ -29,6 +31,7 @@ public class HideWhenClicked : MonoBehaviour {
 				
 				if(playerInfo.GetCoins() >= 900 && !playerInfo.GetGunUpgrade()){
 					playerInfo.SetGunUpgrade(true);
+					source.PlayOneShot(purchaseUpgradeSound);
 					playerInfo.setCoins(playerInfo.GetCoins() - 900);
 				}
 				else if(playerInfo.GetGunUpgrade() == true)
@@ -43,6 +46,7 @@ public class HideWhenClicked : MonoBehaviour {
 				
 				if(playerInfo.GetCoins() >= 600 && !playerInfo.GetSpeedUpgrade()){
 					playerInfo.SetSpeedUpgrade(true);
+					source.PlayOneShot(purchaseUpgradeSound);
 					playerInfo.setCoins(playerInfo.GetCoins() - 600);
 				}
 				else if(playerInfo.GetSpeedUpgrade() == true)
@@ -57,6 +61,7 @@ public class HideWhenClicked : MonoBehaviour {
 				
 				if(playerInfo.GetCoins() >= 300 && !playerInfo.GetTorchUpgrade()){
 					playerInfo.SetTorchUpgrade(true);
+					source.PlayOneShot(purchaseUpgradeSound);
 					playerInfo.setCoins(playerInfo.GetCoins() - 300);
 				}
 				else if(playerInfo.GetTorchUpgrade() == true)

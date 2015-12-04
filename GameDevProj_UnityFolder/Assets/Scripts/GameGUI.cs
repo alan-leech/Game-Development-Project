@@ -6,27 +6,23 @@ public class GameGUI : MonoBehaviour {
 	/** 
 	 * Reference All Images for GUI Textures
 	 */
-	public Texture2D civilian0;
-	public Texture2D civilian1;
-	public Texture2D civilian2;
-	public Texture2D civilian3;
-	public Texture2D civilian4;
-	public Texture2D civilianAll;
 	public Texture2D lives1;
 	public Texture2D lives2;
 	public Texture2D lives3;
-	public Texture2D lives4;
-	public Texture2D lives5;
-	public Texture2D keyIcon;
-	public Texture2D noKeyIcon;
-	public Texture2D timeLeft1;
-	public Texture2D timeLeft2;
-	public Texture2D timeLeft3;
-	public Texture2D timeLeft4;
-	public Texture2D timeLeft5;
-	
+	public Texture2D key;
+	public Texture2D noKey;
+    public Texture2D health1;
+    public Texture2D health2;
+    public Texture2D health3;
+    public Texture2D health4;
+    public Texture2D health5;
+    public Texture2D coin;
+    public Texture2D gunIcon;
+    public Texture2D speedBoostIcon;
+    public Texture2D torchIcon;
 
-	private PlayerBehaviour playerInfo;
+
+    private PlayerBehaviour playerInfo;
 
 
 	// Use this for initialization
@@ -34,49 +30,25 @@ public class GameGUI : MonoBehaviour {
 		playerInfo = gameObject.GetComponent<PlayerBehaviour>();
 	}
 	
-	/**
-	* main GUI method:
-	*	
-	* <ol>
-	*  <li>start a horizontal layout arrangement </li>
-	*  <li>display lives left</li>
-	*  <li>display Civilians Saved</li>
-	*  <li>display whether or not player is carrying the key</li>
-	* </ol>
-	*/
+
 	private void OnGUI(){
  		GUILayout.BeginHorizontal();
  		DisplayLivesLeft();
-		DisplayHealth ();
-		DisplayCoins ();
-		DisplayKeyStatus();
-		GUILayout.EndHorizontal();
-		GUILayout.BeginHorizontal();
-		DisplayUpgrades ();
-		GUILayout.EndHorizontal();
+        DisplayKeyStatus();
+        DisplayHealth ();
+        DisplayUpgrades();
+        DisplayCoins ();
+       	GUILayout.EndHorizontal();
 	}
 
 	/**
 	 * Display Key icon to show if the player is carrying the key
 	 */
 	void DisplayKeyStatus(){
-
-		GUILayout.Label ("KEY PIECES: " + playerInfo.GetKeyPieces() + "/4");
-
-		/*
-		//bool carryingKey = playerInfo.IsCarryingKey();
-		if (carryingKey) {
-			GUILayout.Label ("Key:");
-			GUILayout.Label (keyIcon);
-		} 
-		else if(!carryingKey)
-		{
-			GUILayout.Label ("Key:");
-			GUILayout.Label (noKeyIcon);
-		}
-		*/
-
-	}
+	
+        if (playerInfo.GetKeyPieces() >= 4) { GUI.Label(new Rect(500, 0, key.width, key.height), key); }
+        else{ GUI.Label(new Rect(500, 0, noKey.width, noKey.height), noKey); }		
+    }
 
 	/**
 	 * Display Life Icons to show how many lives the player has left
@@ -84,56 +56,49 @@ public class GameGUI : MonoBehaviour {
 	void DisplayLivesLeft(){
 		int livesLeft = playerInfo.GetLivesLeft();
 
-		if (livesLeft == 1) { GUILayout.Label("Lives:" + livesLeft); /*GUILayout.Label(lives1);*/}
-		//if (livesLeft == 1) { GUILayout.Label("Lives:" + livesLeft); GUI.Label(noteRect, lives1);}
-		if (livesLeft == 2) { GUILayout.Label("Lives:" + livesLeft); /*GUILayout.Label(lives2);*/}
-		//if (livesLeft == 2) { GUILayout.Label("Lives:" + livesLeft); GUI.Label(noteRect, lives2);}
-		if (livesLeft == 3) { GUILayout.Label("Lives:" + livesLeft); /*GUILayout.Label(lives3);*/}
-	}
+        if (livesLeft == 1) { GUI.Label(new Rect(100, 0, lives1.width, lives1.height), lives1); }
+        if (livesLeft == 2) { GUI.Label(new Rect(100, 0, lives2.width, lives2.height), lives2); }
+        if (livesLeft == 3) { GUI.Label(new Rect(100, 0, lives3.width, lives3.height), lives3); }
 
-	/**
-	 * Display Civilian Icons to show how many Civilians the player has saved
-	 * Display "ALL" Icon when number of Civilians saved equals the total Civilians in the level
-	 */
+    }
+
 	void DisplayCoins(){
 		int coins = playerInfo.GetCoins();
 
-		GUILayout.Label ("COINS: " + coins);
-		//if (civiliansSaved == 0) { GUILayout.Label("Civilians:" + civiliansSaved); GUILayout.Label(civilian0);}
-		//if (civiliansSaved == 1) { GUILayout.Label("Civilians:" + civiliansSaved); GUILayout.Label(civilian1);}
-	}
+        GUI.Label(new Rect(0, 0, coin.width, coin.height), coin);
+        GUI.color = Color.black;
+		GUILayout.Label ("               " +  coins + "\t\t\t\t\t\t\t\t\t" +  playerInfo.GetKeyPieces() + "/4");
 
-	void DisplayHealth(){
+
+    }
+
+    void DisplayHealth(){
 		int health = playerInfo.GetHealth();
 		
-		GUILayout.Label ("Health: " + health);
-		//if (civiliansSaved == 0) { GUILayout.Label("Civilians:" + civiliansSaved); GUILayout.Label(civilian0);}
-		//if (civiliansSaved == 1) { GUILayout.Label("Civilians:" + civiliansSaved); GUILayout.Label(civilian1);}
-	}
+        if (health == 1) { GUI.Label(new Rect(350, 0, health1.width, health1.height/2), health1); }
+        if (health == 2) { GUI.Label(new Rect(350, 0, health2.width, health2.height/2), health2); }
+        if (health == 3) { GUI.Label(new Rect(350, 0, health3.width, health3.height/2), health3); }
+        if (health == 4) { GUI.Label(new Rect(350, 0, health4.width, health4.height/2), health4); }
+        if (health == 5) { GUI.Label(new Rect(350, 0, health5.width, health5.height/2), health5); }
+    }
 
 	void DisplayUpgrades(){
 		bool gun = playerInfo.GetGunUpgrade();
 		bool speedBoost = playerInfo.GetSpeedUpgrade();
 		bool torch = playerInfo.GetTorchUpgrade();
 
-		GUILayout.Label ("GUN: " + gun);
-		GUILayout.Label ("SPEED BOOST: " + speedBoost);
-		GUILayout.Label ("TORCH: " + torch);
-
-		//if (civiliansSaved == 0) { GUILayout.Label("Civilians:" + civiliansSaved); GUILayout.Label(civilian0);}
-		//if (civiliansSaved == 1) { GUILayout.Label("Civilians:" + civiliansSaved); GUILayout.Label(civilian1);}
-	}
-	/*
-	void DisplayExitPopup()
-	{
-		bool carryingKey = playerScriptedObject.IsCarryingKey();
-		bool allCivilians = playerScriptedObject.SavedAllCivilains();
-
-		if(!wasOn & (allCivilians & carryingKey)){
-			Instantiate(exitPopupPrefab);
-			wasOn = true;
-		}
-	}
-	*/
-
-}
+        if (gun == true && speedBoost == false && torch == false) { GUI.Label(new Rect(0, 100, gunIcon.width, gunIcon.height), gunIcon); }
+        if (speedBoost == true && gun == false && torch == false){ GUI.Label(new Rect(0, 100, speedBoostIcon.width, speedBoostIcon.height), speedBoostIcon);}
+        if (torch == true && speedBoost == false && gun == false) {GUI.Label(new Rect(0, 100, torchIcon.width, torchIcon.height), torchIcon);}
+        if (gun == true && speedBoost == true && torch == false) { GUI.Label(new Rect(0, 100, gunIcon.width, gunIcon.height), gunIcon); }
+        if (speedBoost == true && gun == true && torch == false) { GUI.Label(new Rect(0, 200, speedBoostIcon.width, speedBoostIcon.height), speedBoostIcon); }
+        if (torch == true && speedBoost == false && gun == true) { GUI.Label(new Rect(0, 200, torchIcon.width, torchIcon.height), torchIcon); }
+        if (gun == true && speedBoost == false && torch == true) { GUI.Label(new Rect(0, 100, gunIcon.width, gunIcon.height), gunIcon); }
+        if (gun == false && speedBoost == true && torch == true) { GUI.Label(new Rect(0, 100, speedBoostIcon.width, speedBoostIcon.height), speedBoostIcon); }
+        if (speedBoost == true && gun == false && torch == true) { GUI.Label(new Rect(0, 200, torchIcon.width, torchIcon.height), torchIcon); }
+        if (gun == true && speedBoost == true && torch == true) { GUI.Label(new Rect(0, 100, gunIcon.width, gunIcon.height), gunIcon); }
+        if (gun == true && speedBoost == true && torch == true) { GUI.Label(new Rect(0, 200, speedBoostIcon.width, speedBoostIcon.height), speedBoostIcon); }
+        if (gun == true && speedBoost == true && torch == true) { GUI.Label(new Rect(0, 300, torchIcon.width, torchIcon.height), torchIcon); }
+		
+    }
+}//end of class

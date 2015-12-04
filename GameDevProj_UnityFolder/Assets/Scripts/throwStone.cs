@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class throwStone : MonoBehaviour {
+public class ThrowStone : MonoBehaviour {
 
 	public GameObject stone;
 
